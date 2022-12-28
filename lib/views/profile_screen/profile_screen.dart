@@ -1,6 +1,9 @@
 import 'package:ecomm_app/consts/consts.dart';
 import 'package:ecomm_app/consts/list.dart';
+import 'package:ecomm_app/controllers/auth_controller.dart';
+import 'package:ecomm_app/views/auth_screen/login_screen.dart';
 import 'package:ecomm_app/widgets_common/bg_widget.dart';
+import 'package:get/get.dart';
 
 import 'components/details_card.dart';
 
@@ -18,12 +21,13 @@ class ProfileScreen extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Align(alignment: Alignment.topRight, child: Icon(Icons.edit))
-                  .onTap(() {}),
+              child:
+                  Align(alignment: Alignment.topRight, child: Icon(Icons.edit))
+                      .onTap(() {}),
             ),
             //users details section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0 ),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
                   Image.asset(
@@ -44,7 +48,10 @@ class ProfileScreen extends StatelessWidget {
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: whiteColor)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await Get.put(AuthController().signoutMethod(context));
+                        Get.offAll(() => const LoginScreen());
+                      },
                       child: logout.text.fontFamily(semibold).white.make())
                 ],
               ),
